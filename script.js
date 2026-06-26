@@ -221,6 +221,16 @@ window.addEventListener("scroll", () => {
 ctaFloat.addEventListener("click", () =>
   rsvpForm.scrollIntoView({ behavior: "smooth", block: "start" }));
 
+/* ---------- Pause musique quand la page perd le focus ---------- */
+document.addEventListener("visibilitychange", () => {
+  if (!soundOn) return;
+  if (document.hidden) {
+    bgAudio.pause();
+  } else {
+    bgAudio.play().catch(() => {});
+  }
+});
+
 /* ---------- RSVP ---------- */
 const form  = document.getElementById("rsvp-form");
 const extra = document.getElementById("extra-fields");
