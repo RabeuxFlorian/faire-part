@@ -120,11 +120,7 @@ img { max-width: 100%; display: block; }
 }
 .intro__overlay.is-gone { opacity: 0; pointer-events: none; }
 .intro__cursive {
-  font-family: var(--script);
-  color: #fff;
-  font-size: 2.1rem;
-  text-shadow: 0 2px 14px rgba(0, 0, 0, .5);
-  animation: glow 2.6s ease-in-out infinite;
+  display: none;
 }
 @keyframes glow { 0%,100% { opacity: .82; } 50% { opacity: 1; } }
 .intro__skip {
