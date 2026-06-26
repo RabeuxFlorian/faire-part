@@ -277,6 +277,59 @@ img { max-width: 100%; display: block; }
 .btn-soft:hover { background: #fff; border-color: var(--gold); }
 .btn-soft svg { width: 16px; height: 16px; fill: none; stroke: var(--gold); stroke-width: 1.7; stroke-linejoin: round; stroke-linecap: round; }
 
+/* ============ Carrousel lieux ============ */
+.venues-carousel { position: relative; margin-bottom: 0; }
+.venues-track {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  gap: 0;
+}
+.venues-track::-webkit-scrollbar { display: none; }
+.venue-card {
+  flex: 0 0 100%;
+  scroll-snap-align: center;
+  background: var(--card);
+  border-radius: 16px;
+  padding: 24px 20px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+.venue-tag {
+  font-family: var(--sans);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: .1em;
+  color: var(--gold-deep);
+  background: rgba(198,167,94,.12);
+  border-radius: 999px;
+  padding: 5px 14px;
+}
+.venue-name {
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: 1.25rem;
+  color: var(--navy);
+  margin-top: 4px;
+}
+.venue-place {
+  font-family: var(--serif-soft);
+  font-style: italic;
+  font-size: 1.05rem;
+  color: var(--body);
+}
+.venue-addr2 {
+  font-size: .95rem;
+  color: var(--muted);
+  line-height: 1.5;
+  margin-bottom: 8px;
+}
+
 /* carrousel */
 .carousel { position: relative; }
 .carousel__track {

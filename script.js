@@ -9,13 +9,11 @@
    ============================================================ */
 
 const PROGRAM = [
-  { time: "16H00", title: "Accueil des invités",  description: "Arrivée et installation" },
-  { time: "16H30", title: "Cérémonie",             description: "Échange des vœux et des alliances" },
-  { time: "17H15", title: "Sortie des mariés",     description: "Haie d'honneur et photos de groupe" },
-  { time: "17H30", title: "Cocktail",              description: "Vin d'honneur & animations" },
-  { time: "19H30", title: "Dîner",                 description: "Ouverture de la salle et installation des invités" },
-  { time: "22H30", title: "Pièce montée",          description: "Coupe du gâteau & champagne" },
-  { time: "23H00", title: "Ouverture du bal",      description: "Soirée dansante" },
+  { time: "11H00", title: "Cérémonie civile",       description: "Maison communale de Grâce-Hollogne" },
+  { time: "12H15", title: "Cérémonie religieuse",   description: "Église d'Horion-Hozémont" },
+  { time: "14H00", title: "Vin d'honneur",          description: "Salle Saint-Lambert, Mons-lez-Liège" },
+  { time: "14H00", title: "Repas",                  description: "Suivi du vin d'honneur" },
+  { time: "20H00", title: "Réception",              description: "Soirée dansante" },
 ];
 
 const MENU = [
@@ -30,7 +28,7 @@ const MENU = [
     "<p><strong>Option 1 :</strong> Entremets vanille &amp; fruits rouges</p><p></p><p><strong>Option 2 :</strong> Pièce montée traditionnelle</p>" ] },
 ];
 
-const EVENT_DATE = new Date("2027-03-21T00:00:00+01:00");
+const EVENT_DATE = new Date("2026-09-19T11:00:00+02:00");
 
 /* ---------- Éléments ---------- */
 const intro        = document.getElementById("intro");
@@ -179,7 +177,26 @@ document.getElementById("menu").innerHTML = MENU.map(c => `
     ${c.items.map(h => `<div class="menu__item">${h}</div>`).join("")}
   </div>`).join("");
 
-/* ---------- Carrousel ---------- */
+/* ---------- Carrousel lieux ---------- */
+(function () {
+  const track = document.getElementById("venues-track");
+  const dots  = document.getElementById("venues-dots");
+  if (!track || !dots) return;
+  [...track.children].forEach((_, i) => {
+    const b = document.createElement("button");
+    b.setAttribute("aria-label", `Lieu ${i + 1}`);
+    if (i === 0) b.classList.add("is-active");
+    b.addEventListener("click", () =>
+      track.scrollTo({ left: track.clientWidth * i, behavior: "smooth" }));
+    dots.appendChild(b);
+  });
+  track.addEventListener("scroll", () => {
+    const i = Math.round(track.scrollLeft / track.clientWidth);
+    [...dots.children].forEach((d, k) => d.classList.toggle("is-active", k === i));
+  }, { passive: true });
+})();
+
+/* ---------- Carrousel photos ---------- */
 (function () {
   const track = document.getElementById("carousel-track");
   const dots  = document.getElementById("carousel-dots");
