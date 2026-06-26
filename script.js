@@ -70,9 +70,7 @@ function startIntro() {
   if (introStarted) return;
   introStarted = true;
 
-  unlockAudio();
-
-  // Lancer la musique de fond dès le début de la vidéo
+  // Lancer la musique — play() depuis un geste direct déverrouille aussi iOS
   bgAudio.volume = 0.5;
   bgAudio.play().then(() => { soundOn = true; setSoundIcon(); }).catch(() => {});
 
