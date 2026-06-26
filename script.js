@@ -72,6 +72,10 @@ function startIntro() {
 
   unlockAudio();
 
+  // Lancer la musique de fond dès le début de la vidéo
+  bgAudio.volume = 0.5;
+  bgAudio.play().then(() => { soundOn = true; setSoundIcon(); }).catch(() => {});
+
   // iOS : joue muet d'abord, puis tente de remettre le son
   introVideo.muted = true;
   introVideo.play().then(() => {
@@ -116,13 +120,7 @@ function revealInvitation() {
   invitation.classList.add("is-ready");
   setTimeout(() => { intro.style.display = "none"; }, 1000);
 
-  /* Audio : déjà déverrouillé lors du tap → play() fonctionne */
-  bgAudio.volume = 0.5;
-  bgAudio.play().then(() => {
-    soundOn = true; setSoundIcon();
-  }).catch(() => {
-    soundOn = false; setSoundIcon();
-  });
+  /* Audio déjà lancé au tap de l'intro */
 
   startCountdown();
   initReveals();
