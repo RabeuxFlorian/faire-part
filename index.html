@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
+    <link rel="icon" type="image/png" href="assets/img/revelia-logo.png" />
+    <title>Vous êtes invités</title>
+    <meta name="description" content="Entrez dans l’histoire. Une création signée Révelia." />
+    <meta name="google" content="notranslate" />
+    <meta http-equiv="Content-Language" content="fr" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Parisienne&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+
+  <body translate="no" class="notranslate">
+    <!-- Barre de progression de défilement -->
+    <div id="progress" class="progress"></div>
+
+    <!-- Bouton son -->
+    <button id="sound-toggle" class="sound-toggle" type="button" aria-label="Activer le son">
+      <svg id="icon-muted" viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M3 9v6h4l5 5V4L7 9H3z" />
+        <line x1="16" y1="9" x2="22" y2="15" /><line x1="22" y1="9" x2="16" y2="15" />
+      </svg>
+      <svg id="icon-sound" viewBox="0 0 24 24" aria-hidden="true" style="display:none">
+        <path d="M3 9v6h4l5 5V4L7 9H3z" />
+        <path d="M16 8a5 5 0 0 1 0 8" /><path d="M19 5a9 9 0 0 1 0 14" />
+      </svg>
+    </button>
+
+    <!-- ============ INTRO VIDÉO (toucher pour entrer) ============ -->
+    <div id="intro" class="intro">
+      <video id="intro-video" class="intro__video" src="assets/media/intro.mp4" playsinline preload="auto"></video>
+      <div id="intro-overlay" class="intro__overlay">
+        <p class="intro__cursive">Touchez pour entrer</p>
+      </div>
+      <button id="intro-skip" class="intro__skip" type="button">Passer</button>
+    </div>
+
+    <!-- ============ INVITATION ============ -->
+    <main id="invitation" class="invitation" aria-hidden="true">
+      <!-- NOMS -->
+      <section class="names reveal">
+        <h1 class="names__title">Manon <span class="amp">&amp;</span> Julien</h1>
+        <p class="names__sub">Vous invitent à célébrer leur mariage</p>
+        <p class="names__date">Dimanche 21 mars 2027</p>
+        <div class="divider" aria-hidden="true"><span></span><svg viewBox="0 0 24 24"><path d="M12 4l2.2 5.3L20 12l-5.8 2.7L12 20l-2.2-5.3L4 12l5.8-2.7z"/></svg><span></span></div>
+      </section>
+
+      <!-- COMPTE À REBOURS -->
+      <section class="block reveal">
+        <div class="card card--countdown">
+          <p class="eyebrow">Compte à rebours</p>
+          <p class="subtitle-it">avant le grand jour</p>
+          <div class="countdown">
+            <div class="cd"><span class="cd__n" id="cd-days">--</span><span class="cd__l">Jours</span></div>
+            <div class="cd"><span class="cd__n" id="cd-hours">--</span><span class="cd__l">Heures</span></div>
+            <div class="cd"><span class="cd__n" id="cd-mins">--</span><span class="cd__l">Minutes</span></div>
+            <div class="cd"><span class="cd__n" id="cd-secs">--</span><span class="cd__l">Secondes</span></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- LIEU -->
+      <section class="block reveal">
+        <h2 class="sec-title">
+          <svg class="sec-ic" viewBox="0 0 24 24"><path d="M12 2C8 2 5 5 5 9c0 5 7 13 7 13s7-8 7-13c0-4-3-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
+          Lieu
+        </h2>
+        <p class="venue">Domaine d’Aveny</p>
+        <p class="venue-addr">1 Rue Pavée, 27630<br />Vexin-sur-Epte, France</p>
+        <div class="loc-actions">
+          <a class="btn-soft" href="https://share.google/hNrrvwApVIoRqLtqI" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24"><path d="M21 3 3 10l7 3 3 7z"/></svg> Ouvrir dans Maps
+          </a>
+          <a class="btn-soft" href="https://share.google/hNrrvwApVIoRqLtqI" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24"><path d="M12 2C8 2 5 5 5 9c0 5 7 13 7 13s7-8 7-13c0-4-3-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg> Itinéraire
+          </a>
+        </div>
+        <div class="carousel">
+          <div class="carousel__track" id="carousel-track">
+            <img src="assets/img/loc1.jpg" alt="Domaine d’Aveny" />
+            <img src="assets/img/loc2.jpg" alt="Domaine d’Aveny" />
+            <img src="assets/img/loc3.jpg" alt="Domaine d’Aveny" />
+          </div>
+          <div class="carousel__dots" id="carousel-dots"></div>
+        </div>
+      </section>
+
+      <!-- PROGRAMME -->
+      <section class="block reveal">
+        <h2 class="sec-title">
+          <svg class="sec-ic" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+          Programme
+        </h2>
+        <div class="timeline" id="timeline"></div>
+      </section>
+
+      <!-- MENU -->
+      <section class="block reveal">
+        <h2 class="sec-title">
+          <svg class="sec-ic" viewBox="0 0 24 24"><path d="M5 2v8a2 2 0 0 0 4 0V2M7 10v12M16 2c-1.5 0-3 1.5-3 5s1.5 4 3 4 3-.5 3-4-1.5-5-3-5zM16 15v7"/></svg>
+          Menu
+        </h2>
+        <div class="menu" id="menu"></div>
+      </section>
+
+      <!-- CODE VESTIMENTAIRE -->
+      <section class="block reveal">
+        <h2 class="sec-title">
+          <svg class="sec-ic" viewBox="0 0 24 24"><path d="M16 3 12 6 8 3 3 7l3 3 1-1v11h10V9l1 1 3-3z"/></svg>
+          Code vestimentaire
+        </h2>
+        <div class="card card--dress">
+          <span class="dress-badge">Tenue Élégante</span>
+          <h3 class="dress-h">Messieurs</h3>
+          <p>Costume sombre ou bleu marine, chemise claire.</p>
+          <h3 class="dress-h">Mesdames</h3>
+          <p>Robe longue ou midi, matières fluides et élégantes.</p>
+        </div>
+      </section>
+
+      <!-- LISTE DE MARIAGE -->
+      <section class="block reveal">
+        <h2 class="sec-title">
+          <svg class="sec-ic" viewBox="0 0 24 24"><path d="M20 7H4v4h16V7zM5 11v9h14v-9M12 7V4M12 7c-2 0-3.5-.8-3.5-2S9.5 3 11 4M12 7c2 0 3.5-.8 3.5-2S14.5 3 13 4M12 7v13"/></svg>
+          Liste de mariage
+        </h2>
+        <a class="btn-solid" href="https://www.milirose.com/liste-de-mariage.html" target="_blank" rel="noopener">
+          Découvrir
+          <svg viewBox="0 0 24 24"><path d="M14 4h6v6M20 4l-9 9M19 13v5a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h5"/></svg>
+        </a>
+      </section>
+
+      <!-- RSVP -->
+      <section class="block reveal">
+        <div class="rsvp-ic" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M12 21s-7-4.5-9-9c-1.3-3 1-6 4-5 1.6.5 2.5 2 3 3 .5-1 1.4-2.5 3-3 3-1 5.3 2 4 5-2 4.5-9 9-9 9z"/></svg>
+        </div>
+        <h2 class="sec-title sec-title--plain">Merci de confirmer votre présence</h2>
+        <div class="divider" aria-hidden="true"><span></span><svg viewBox="0 0 24 24"><path d="M12 4l2.2 5.3L20 12l-5.8 2.7L12 20l-2.2-5.3L4 12l5.8-2.7z"/></svg><span></span></div>
+
+        <form id="rsvp-form" class="rsvp" novalidate>
+          <label class="field">
+            <span class="field__l">Merci d’indiquer votre nom complet <i>*</i></span>
+            <input type="text" name="name" placeholder="Nom et prénom" required />
+          </label>
+
+          <div class="field">
+            <span class="field__l">Serez-vous présent(e) ? <i>*</i></span>
+            <div class="attend">
+              <label class="attend__opt"><input type="radio" name="attending" value="yes" required /><span>Oui, je serai présent.</span></label>
+              <label class="attend__opt"><input type="radio" name="attending" value="no" /><span>Non, désolé, je ne pourrai pas.</span></label>
+            </div>
+          </div>
+
+          <div id="extra-fields" hidden>
+            <label class="field">
+              <span class="field__l">Serez-vous accompagné(e) ?</span>
+              <input type="text" name="plusone" placeholder="Ex : Sarah Martin" />
+            </label>
+            <label class="field">
+              <span class="field__l">Avez-vous des allergies ou restrictions alimentaires ?</span>
+              <input type="text" name="dietary" placeholder="Ex : arachides, gluten, fruits de mer…" />
+            </label>
+          </div>
+
+          <button type="submit" class="btn-solid btn-solid--full">Envoyer votre réponse</button>
+          <p id="rsvp-success" class="rsvp__ok" hidden>Votre RSVP a bien été reçu.</p>
+        </form>
+      </section>
+
+      <!-- FOOTER -->
+      <footer class="footer">
+        <img class="footer__logo" src="assets/img/revelia-word.png" alt="Révelia" />
+        <p class="footer__tag">Chaque histoire mérite une entrée exceptionnelle</p>
+      </footer>
+    </main>
+
+    <!-- Bouton flottant -->
+    <button id="cta-float" class="cta-float" type="button" aria-hidden="true">Confirmer ma présence</button>
+
+    <!-- Audio de fond -->
+    <audio id="bg-audio" src="assets/media/background.mp3" loop preload="auto"></audio>
+
+    <script src="script.js"></script>
+  </body>
+</html>
