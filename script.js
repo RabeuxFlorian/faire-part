@@ -70,12 +70,9 @@ function startIntro() {
   if (introStarted) return;
   introStarted = true;
 
-  unlockAudio(); // déverrouille audio pendant le geste utilisateur
+  unlockAudio();
 
-  introOverlay.classList.add("is-gone");
-
-  // iOS : on joue d'abord muet pour garantir la lecture,
-  // puis on tente de remettre le son.
+  // iOS : joue muet d'abord, puis tente de remettre le son
   introVideo.muted = true;
   introVideo.play().then(() => {
     introVideo.muted = false;
@@ -87,6 +84,12 @@ function startIntro() {
   // Bouton "Passer" après 1,5 s
   setTimeout(() => introSkip.classList.add("is-shown"), 1500);
 }
+
+// L'overlay ne disparaît qu'au moment où la vidéo affiche vraiment
+// son premier frame — plus d'écran noir entre le tap et la lecture
+introVideo.addEventListener("playing", () => {
+  introOverlay.classList.add("is-gone");
+}, { once: true });
 
 introOverlay.addEventListener("click",      startIntro);
 introOverlay.addEventListener("touchstart", startIntro, { passive: true });
