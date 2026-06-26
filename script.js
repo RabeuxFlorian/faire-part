@@ -20,10 +20,10 @@ const MENU = [
   { category: "🥂 Cocktail", items: [
     "<p>Champagne Brut</p><p>Sélection de vins blancs &amp; rosés</p><p>Mini tartelettes fines aux légumes</p><p>Gougères au comté</p><p>Saumon gravlax &amp; crème citronnée</p><p>Foie gras sur brioche toastée</p>" ] },
   { category: "🍽 Entrée", items: [
-    "<p><strong>Option 1 :</strong> Carpaccio de Saint-Jacques, agrumes &amp; huile d'olive vierge</p>",
-    "<p><strong>Option 2 :</strong> Foie gras mi-cuit, chutney de figues &amp; pain de campagne</p>" ] },
+    "<p><strong>Option 1 :</strong> Carpaccio de saumon</p>",
+    "<p><strong>Option 2 :</strong> Raviole de homard</p>" ] },
   { category: "🍛 Plat", items: [
-    "<p><strong>Option 1 :</strong> Filet de bœuf rôti, jus réduit au thym - Purée truffée &amp; légumes de saison</p><p></p><p><strong>Option 2 :</strong> Pavé de bar, beurre blanc citronné - Risotto crémeux aux asperges</p>" ] },
+    "<p>Pintadeau</p>" ] },
   { category: "🍰 Dessert", items: [
     "<p><strong>Option 1 :</strong> Entremets vanille &amp; fruits rouges</p><p></p><p><strong>Option 2 :</strong> Pièce montée traditionnelle</p>" ] },
 ];
@@ -177,23 +177,45 @@ document.getElementById("menu").innerHTML = MENU.map(c => `
     ${c.items.map(h => `<div class="menu__item">${h}</div>`).join("")}
   </div>`).join("");
 
-/* ---------- Carrousel lieux ---------- */
+/* ---------- Carrousel lieux (auto-scroll) ---------- */
 (function () {
   const track = document.getElementById("venues-track");
   const dots  = document.getElementById("venues-dots");
   if (!track || !dots) return;
+  const count = track.children.length;
+
   [...track.children].forEach((_, i) => {
     const b = document.createElement("button");
     b.setAttribute("aria-label", `Lieu ${i + 1}`);
     if (i === 0) b.classList.add("is-active");
-    b.addEventListener("click", () =>
-      track.scrollTo({ left: track.clientWidth * i, behavior: "smooth" }));
+    b.addEventListener("click", () => {
+      track.scrollTo({ left: track.clientWidth * i, behavior: "smooth" });
+    });
     dots.appendChild(b);
   });
-  track.addEventListener("scroll", () => {
+
+  const updateDots = () => {
     const i = Math.round(track.scrollLeft / track.clientWidth);
     [...dots.children].forEach((d, k) => d.classList.toggle("is-active", k === i));
-  }, { passive: true });
+  };
+  track.addEventListener("scroll", updateDots, { passive: true });
+
+  // Auto-scroll toutes les 3s, pause si l'utilisateur interagit
+  let timer = null;
+  const goNext = () => {
+    const cur = Math.round(track.scrollLeft / track.clientWidth);
+    const next = (cur + 1) % count;
+    track.scrollTo({ left: track.clientWidth * next, behavior: "smooth" });
+  };
+  const startAuto = () => { timer = setInterval(goNext, 3000); };
+  const stopAuto  = () => { clearInterval(timer); };
+
+  track.addEventListener("touchstart",  stopAuto,  { passive: true });
+  track.addEventListener("mousedown",   stopAuto);
+  track.addEventListener("touchend",    () => setTimeout(startAuto, 4000), { passive: true });
+  track.addEventListener("mouseleave",  () => setTimeout(startAuto, 4000));
+
+  startAuto();
 })();
 
 /* ---------- Carrousel photos ---------- */
