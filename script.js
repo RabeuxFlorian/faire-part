@@ -113,6 +113,8 @@ function revealInvitation() {
 
   try { introVideo.pause(); } catch (_) {}
 
+  window.scrollTo({ top: 0, behavior: "instant" });
+
   intro.classList.add("is-hidden");
   invitation.setAttribute("aria-hidden", "false");
   invitation.classList.add("is-ready");
